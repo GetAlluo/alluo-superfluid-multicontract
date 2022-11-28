@@ -27,3 +27,67 @@ dataSources:
         - event: Upgraded(indexed address)
           handler: handleUpgraded
       file: ./src/erc-1967-proxy.ts
+  - kind: ethereum
+    name: SuperfluidResolver
+    network: matic
+    source:
+      address: "0x9751C196fd5C7A62243434C2e4e7D117FFEDb6E8"
+      abi: SuperfluidResolver
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ClosedStreamToPreventLiquidation
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - WrappedTokenToPreventLiquidation
+      abis:
+        - name: SuperfluidResolver
+          file: ./abis/SuperfluidResolver.json
+      eventHandlers:
+        - event: ClosedStreamToPreventLiquidation(indexed address,indexed address)
+          handler: handleClosedStreamToPreventLiquidation
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: WrappedTokenToPreventLiquidation(indexed address,indexed address)
+          handler: handleWrappedTokenToPreventLiquidation
+      file: ./src/superfluid-resolver.ts
+  - kind: ethereum
+    name: SuperfluidEndResolver
+    network: matic
+    source:
+      address: "0xd4E890FBd77b5E048B31ee2b5ecfd5365f386005"
+      abi: SuperfluidEndResolver
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ClosedStreamEndDate
+        - SuperfluidEndResolverRoleAdminChanged
+        - SuperfluidEndResolverRoleGranted
+        - SuperfluidEndResolverRoleRevoked
+        - SuperfluidEndResolverWrappedTokenToPreventLiquidation
+      abis:
+        - name: SuperfluidEndResolver
+          file: ./abis/SuperfluidEndResolver.json
+      eventHandlers:
+        - event: ClosedStreamEndDate(indexed address,indexed address)
+          handler: handleClosedStreamEndDate
+        - event: SuperfluidEndResolverRoleAdminChanged(indexed bytes32,indexed bytes32,indexed
+            bytes32)
+          handler: handleSuperfluidEndResolverRoleAdminChanged
+        - event: SuperfluidEndResolverRoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleSuperfluidEndResolverRoleGranted
+        - event: SuperfluidEndResolverRoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleSuperfluidEndResolverRoleRevoked
+        - event: SuperfluidEndResolverWrappedTokenToPreventLiquidation(indexed address,indexed
+            address)
+          handler: handleSuperfluidEndResolverWrappedTokenToPreventLiquidation
+      file: ./src/superfluid-end-resolver.ts

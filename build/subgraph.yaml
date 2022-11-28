@@ -1,0 +1,93 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ERC1967Proxy
+    network: matic
+    source:
+      address: "0xE9E759B969B991F2bFae84308385405B9Ab01541"
+      abi: ERC1967Proxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AdminChanged
+        - BeaconUpgraded
+        - Upgraded
+      abis:
+        - name: ERC1967Proxy
+          file: ERC1967Proxy/abis/ERC1967Proxy.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ERC1967Proxy/ERC1967Proxy.wasm
+  - kind: ethereum
+    name: SuperfluidResolver
+    network: matic
+    source:
+      address: "0x9751C196fd5C7A62243434C2e4e7D117FFEDb6E8"
+      abi: SuperfluidResolver
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ClosedStreamToPreventLiquidation
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - WrappedTokenToPreventLiquidation
+      abis:
+        - name: SuperfluidResolver
+          file: SuperfluidResolver/abis/SuperfluidResolver.json
+      eventHandlers:
+        - event: ClosedStreamToPreventLiquidation(indexed address,indexed address)
+          handler: handleClosedStreamToPreventLiquidation
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: WrappedTokenToPreventLiquidation(indexed address,indexed address)
+          handler: handleWrappedTokenToPreventLiquidation
+      file: SuperfluidResolver/SuperfluidResolver.wasm
+  - kind: ethereum
+    name: SuperfluidEndResolver
+    network: matic
+    source:
+      address: "0xd4E890FBd77b5E048B31ee2b5ecfd5365f386005"
+      abi: SuperfluidEndResolver
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ClosedStreamEndDate
+        - SuperfluidEndResolverRoleAdminChanged
+        - SuperfluidEndResolverRoleGranted
+        - SuperfluidEndResolverRoleRevoked
+        - SuperfluidEndResolverWrappedTokenToPreventLiquidation
+      abis:
+        - name: SuperfluidEndResolver
+          file: SuperfluidEndResolver/abis/SuperfluidEndResolver.json
+      eventHandlers:
+        - event: ClosedStreamEndDate(indexed address,indexed address)
+          handler: handleClosedStreamEndDate
+        - event: SuperfluidEndResolverRoleAdminChanged(indexed bytes32,indexed bytes32,indexed
+            bytes32)
+          handler: handleSuperfluidEndResolverRoleAdminChanged
+        - event: SuperfluidEndResolverRoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleSuperfluidEndResolverRoleGranted
+        - event: SuperfluidEndResolverRoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleSuperfluidEndResolverRoleRevoked
+        - event: SuperfluidEndResolverWrappedTokenToPreventLiquidation(indexed address,indexed
+            address)
+          handler: handleSuperfluidEndResolverWrappedTokenToPreventLiquidation
+      file: SuperfluidEndResolver/SuperfluidEndResolver.wasm

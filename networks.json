@@ -2,6 +2,12 @@
   "matic": {
     "ERC1967Proxy": {
       "address": "0xE9E759B969B991F2bFae84308385405B9Ab01541"
+    },
+    "SuperfluidResolver": {
+      "address": "0x9751C196fd5C7A62243434C2e4e7D117FFEDb6E8"
+    },
+    "SuperfluidEndResolver": {
+      "address": "0xd4E890FBd77b5E048B31ee2b5ecfd5365f386005"
     }
   }
 }
